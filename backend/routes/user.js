@@ -1,18 +1,15 @@
 import express from "express";
 import { test } from "../controller/user.js";
-
 const router = express.Router();
 
 //sign in new user
 
 //login user
 
-
 //get All user
-router.get("/test", test);
 
 // //get user by id
-// router.get("/test", test);
+router.get("/test", test);
 
 // // updateuser
 // router.put("/test", test);
