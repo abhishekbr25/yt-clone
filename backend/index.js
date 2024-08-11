@@ -1,4 +1,5 @@
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import authRoute from './routes/authRoute.js'
 import userRouter from './routes/user.js'
 const app = express()
@@ -8,6 +9,8 @@ import { connectdb } from './db/index.js'
 connectdb();
 
 app.use(express.json())
+
+app.use(cookieParser())
 
 app.use('/', authRoute) 
 
