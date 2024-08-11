@@ -1,12 +1,11 @@
 import express from 'express'
-import userRouter from './routes/user.js'
 const app = express()
-const port = 3002
+const port = 3001
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+import { connectdb } from './db/index.js'
+connectdb();
 
+import userRouter from './routes/user.js'
 app.use('/api/user', userRouter)
 
 app.listen(port, () => {

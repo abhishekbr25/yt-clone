@@ -9,15 +9,15 @@ const router = express.Router();
 
 
 //get All user
-router.get("/", test);
-
-//get user by id
 router.get("/test", test);
 
-// updateuser
-router.put("/test", test);
+// //get user by id
+// router.get("/test", test);
 
-//delete user
-router.delete("/test", test);
+// // updateuser
+// router.put("/test", test);
+
+// //delete user
+// router.delete("/test", test);
 
 export default router;
