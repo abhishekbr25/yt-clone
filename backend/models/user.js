@@ -21,9 +21,10 @@ const userSchema = new mongoose.Schema(
     img: {
       type: String,
     },
-    postId: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
+    
+    subscribers: {
+      type: Number,
+    }
   },
   { timestamps: true }
 );
