@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema({
-  userId: {
+  owner: {
     type: String,
     required: true,
   },

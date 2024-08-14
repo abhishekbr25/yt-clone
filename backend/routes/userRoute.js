@@ -1,20 +1,49 @@
 import express from "express";
-import { test } from "../controller/userController.js";
+import { verifyUser } from "../Middlewares/verifyUser.js";
+import {
+  test,
+  searchUser,
+  updateUserDetails,
+  updateUserPassword,
+  deleteUser,
+  subscribe,
+  unsubscribe,
+  like,
+  dislike,
+} from "../controller/userController.js";
+
 const router = express.Router();
 
-//sign in new user
+//test - get current logged user detail
+router.get("/test", verifyUser, test);
 
-//login user
+//search user by id
+router.get("/find/:id", searchUser);
 
-//get All user
+//update user details
+router.put('/update/user-details',verifyUser, updateUserDetails)
 
-// //get user by id
-router.get("/test", test);
+//update user password
+router.put('/update/user-password',verifyUser, updateUserPassword)
 
-// // updateuser
-// router.put("/test", test);
+//delete user Account
+router.delete('/delete',verifyUser, deleteUser)
 
-// //delete user
-// router.delete("/test", test);
+/**
+ * sub/unsub a user/channel
+ * like/dislike a video
+*/
+
+//sub channel
+router.put("/sub/:uid", verifyUser, subscribe);
+
+//unsub channel
+router.put("/unsub/:uid", verifyUser, unsubscribe);
+
+//like a vid
+router.put("/like/:vid", verifyUser, like);
+
+//dislike a vid
+router.put("/dislike/:vid", verifyUser, dislike);
 
 export default router;

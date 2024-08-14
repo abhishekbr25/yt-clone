@@ -21,10 +21,23 @@ const userSchema = new mongoose.Schema(
     img: {
       type: String,
     },
-    
+    videoId: {
+      type: [String],
+      default: []
+    },
+    likedVid:{
+      type: [String],
+      default: []
+    },
+
     subscribers: {
       type: Number,
-    }
+      default:0
+    },
+    subscribedUsers: {
+      type: [String],
+      default:[]
+    },
   },
   { timestamps: true }
 );
