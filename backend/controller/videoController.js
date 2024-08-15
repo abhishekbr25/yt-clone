@@ -1,4 +1,6 @@
 import Video from "../models/videoModel.js";
+import { uploadOnCloudinary } from "../utils/uploadOnCloudinary.js";
+
 
 export async function getVideo(req, res, next) {
   try {
@@ -11,12 +13,18 @@ export async function getVideo(req, res, next) {
     return res.json({ success: true, video });
   } catch (error) {
     console.log(error);
-    res.status(500).json({msg: "server error", error})
+    res.status(500).json({ msg: "server error", error });
   }
 }
 
-export async function addVideo(req, res, next) {
-    
+export async function uploadVideo(req, res, next) {
+  try {
+
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "server error", error });
+  }
 }
 
 export async function updateVideo(req, res, next) {}
