@@ -1,17 +1,24 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+import { ApiError } from "../utils/apiError.js";
 
 export async function verifyUser(req, res, next) {
-  const { token } = req.cookies;
-  const verify = jwt.verify(token, process.env.tokenSecret);
-  //console.log({ verify });
+  try {
+    const { token } = req.cookies;
+    if (!token) throw new ApiError("unAuthorised user access", 401);
 
-  if (!verify) return res.json({ msg: "unAuthenticated" });
-  const user = await User.findById(verify.id);
-  console.log(user);
-  if (!user) return res.json({ msg: "user Not found" });
-console.log('verified User\n');
+    const verify = jwt.verify(token, process.env.tokenSecret);
+    if (!verify)
+      throw new ApiError("unAuthorised user userToken not found", 401);
 
-  req.user = user;
-  return next();
+    const user = await User.findById(verify.id);
+    if (!user) throw new ApiError("User not found");
+
+    console.log("verified User\n");
+
+    req.user = user;
+    return next();
+  } catch (error) {
+    next(error);
+  }
 }
