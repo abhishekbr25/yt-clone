@@ -32,7 +32,7 @@ export const addVideo = async (req, res, next) => {
       throw new ApiError("cant get uploaded file Url");
 
     if (!req.body.title || !req.body.description)
-      throw new ApiError("title and description required"); 
+      throw new ApiError("title and description required");
 
     const video = new Video({
       owner: req.user._id,
@@ -52,10 +52,19 @@ export const addVideo = async (req, res, next) => {
 
 export const updateVideo = async (req, res, next) => {
   try {
+    const thumbnailFile = req.file.thumbnail;
+    console.log(thumbnailFile);
+
+    res.json(thumbnailFile);
+    res.render("video");
+    // const video = Video.findByIdAndUpdate(req.params.id, {
+    //   $set: { ...req.body },
+    // },{new: true});
   } catch (error) {
     next(error);
   }
 };
+
 export const deleteVideo = async (req, res, next) => {
   try {
   } catch (error) {

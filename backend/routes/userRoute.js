@@ -1,6 +1,7 @@
 import express from "express";
 import { verifyUser } from "../Middlewares/verifyUser.js";
 import {
+  getAllUsers,
   test,
   searchUser,
   updateUserDetails,
@@ -13,6 +14,9 @@ import {
 } from "../controller/userController.js";
 
 const router = express.Router();
+
+//test - get All user detail
+router.get("/", getAllUsers);
 
 //test - get current logged user detail
 router.get("/test", verifyUser, test);

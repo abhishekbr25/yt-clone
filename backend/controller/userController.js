@@ -2,6 +2,16 @@ import User from "../models/userModel.js";
 import Video from "../models/videoModel.js";
 import bcrypt from "bcrypt";
 
+export async function getAllUsers(req, res) {
+  // const {user, ...user} = req
+  // console.log({...user});
+  const user = await User.find({})
+  if (!user) {
+    return res.json({ success: false, msg: "unable to get users deatail" });
+  }
+  res.json({ user });
+}
+
 export function test(req, res) {
   // const {user, ...user} = req
   // console.log({...user});

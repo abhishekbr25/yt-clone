@@ -18,7 +18,7 @@ router.post(
     {
       name: "video",
       maxCount: 1,
-    }, 
+    },
     {
       name: "thumbnail",
       maxCount: 1,
@@ -27,7 +27,8 @@ router.post(
   addVideo
 );
 
-router.put("/:id", verifyUser, updateVideo); //title, desc,
+router.put("/:id", upload.single("thumbnail"), updateVideo); //title, desc,
+
 router.delete("/:id", verifyUser, deleteVideo);
 
 export default router;

@@ -3,28 +3,32 @@ import bcrypt from "bcrypt";
 import { createToken } from "../utils/createToken.js";
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  try {
+    const { username, email, password } = req.body;
 
-  if (!username || !email || !password)
-    return res.json({ msg: "all credential required" });
+    if (!username || !email || !password)
+      return res.json({ msg: "all credential required" });
 
-  const existingUser = await User.findOne({ email });
-  if (existingUser) return res.json({ msg: "existing user" });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.json({ msg: "existing user" });
 
-  const user = await User.create({ email, username, password });
-  if (!user) res.json({ msg: "signup failed" });
+    const user = await User.create({ email, username, password });
 
-  const token = await createToken(user._id);
-// console.log(token);
+    if (!user) res.json({ msg: "signup failed" });
+    const token = await createToken(user._id);
+    // console.log(token);
 
-  res.cookie("token", token, {
-    withCredentials: true,
-    httpOnly: false,
-  });
+    res.cookie("token", token, {
+      withCredentials: true,
+      httpOnly: true,
+    });
 
-  return res.json({ msg: "signed in success" });
+    return res.json({ msg: "signed in success" });
 
-  next();
+    next();
+  } catch (error) {
+    next();
+  }
 };
 
 export const login = async (req, res, next) => {
@@ -37,12 +41,12 @@ export const login = async (req, res, next) => {
   const auth = await bcrypt.compare(password, user.password);
   if (!auth) return res.json({ msg: "incorrect password" });
 
-  const token = await createToken(user._id)
-  res.cookie('token', token, {
+  const token = await createToken(user._id);
+  res.cookie("token", token, {
     httpOnly: false,
-    withCredentials: true
-  })
+    withCredentials: true,
+  });
 
-  return res.json({ msg: "user logged in successfully", success: true });
+  return res.status(200).json({ msg: "user logged in successfully"  });
   next();
 };

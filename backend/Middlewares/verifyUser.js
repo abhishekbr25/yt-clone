@@ -4,7 +4,9 @@ import { ApiError } from "../utils/apiError.js";
 
 export async function verifyUser(req, res, next) {
   try {
+    console.log(req.cookies);
     const { token } = req.cookies;
+    
     if (!token) throw new ApiError("unAuthorised user access", 401);
 
     const verify = jwt.verify(token, process.env.tokenSecret);
