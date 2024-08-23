@@ -2,7 +2,7 @@ import express from "express";
 import { verifyUser } from "../Middlewares/verifyUser.js";
 import {
   getAllUsers,
-  test,
+  getProfile,
   searchUser,
   updateUserDetails,
   updateUserPassword,
@@ -15,11 +15,11 @@ import {
 
 const router = express.Router();
 
-//test - get All user detail
+//getAllUsers - get All user detail
 router.get("/", getAllUsers);
 
-//test - get current logged user detail
-router.get("/test", verifyUser, test);
+//getProfile - get current logged user detail
+router.get("/profile", verifyUser, getProfile); 
 
 //search user by id
 router.get("/find/:id", searchUser);

@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import Video from "../models/videoModel.js";
 import bcrypt from "bcrypt";
+import { ApiError } from "../utils/apiError.js";
 
 export async function getAllUsers(req, res) {
   // const {user, ...user} = req
@@ -12,14 +13,17 @@ export async function getAllUsers(req, res) {
   res.json({ user });
 }
 
-export function test(req, res) {
+export function  getProfile(req, res) {
   // const {user, ...user} = req
   // console.log({...user});
-  const { user } = req;
-  if (!user) {
-    return res.json({ success: false, msg: "unauthorised" });
+  try {
+    if (!req.user) {
+        throw new ApiError("unauthorised user access")
+    }
+    return res.json(req.user);
+  } catch (error) {
+    next(error)
   }
-  res.json({ user });
 }
 
 // get User details

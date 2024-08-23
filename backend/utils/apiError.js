@@ -7,6 +7,8 @@
 export class ApiError extends Error {
   constructor(msg, statuscode = 500) {
     super(msg);
+    this.msg = msg
     this.statuscode = statuscode;
   }
 }
+ 

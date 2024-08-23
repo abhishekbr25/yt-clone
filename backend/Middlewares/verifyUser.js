@@ -4,14 +4,16 @@ import { ApiError } from "../utils/apiError.js";
 
 export async function verifyUser(req, res, next) {
   try {
-    console.log(req.cookies);
-    const { token } = req.cookies;
+    // console.log(`verifyUser req.cookie: ${req.cookies}`);
+    console.log(req.headers);
     
-    if (!token) throw new ApiError("unAuthorised user access", 401);
+    const token = req.cookies.token
+    console.log(`token : ${token}`)
+    if (!token) throw new ApiError("Token not found", 401);
 
     const verify = jwt.verify(token, process.env.tokenSecret);
     if (!verify)
-      throw new ApiError("unAuthorised user userToken not found", 401);
+      throw new ApiError("unAuthorised user access", 401);
 
     const user = await User.findById(verify.id);
     if (!user) throw new ApiError("User not found");
@@ -19,8 +21,9 @@ export async function verifyUser(req, res, next) {
     console.log("verified User\n");
 
     req.user = user;
-    return next();
+    next();
   } catch (error) {
-    next(error);
+    res.json({error})
+      // next(error);
   }
 }

@@ -54,20 +54,44 @@ export const updateVideo = async (req, res, next) => {
   try {
     const thumbnailFile = req.file.thumbnail;
     console.log(thumbnailFile);
+    const thumbnailRes = await uploadOnCloudinary(thumbnailFile.path);
+    if (!thumbnailRes) {
+      const video = await Video.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: { ...req.body },
+        },
+        { new: true }
+      );
 
-    res.json(thumbnailFile);
-    res.render("video");
-    // const video = Video.findByIdAndUpdate(req.params.id, {
-    //   $set: { ...req.body },
-    // },{new: true});
+      if (!video) throw new ApiError("video not found", 403);
+      return res.json({ msg: "thumbnail not uploaded, body updated" });
+    }
+
+    const video = await Video.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: { ...req.body, thumbnailUrl: thumbnailRes.secure_url },
+      },
+      { new: true }
+    );
+
+    if (!video) throw new ApiError("video not found", 403);
+    return res.json({ msg: "thumbnail and body uploaded" });
   } catch (error) {
+    res.json({ error });
     next(error);
   }
 };
 
 export const deleteVideo = async (req, res, next) => {
   try {
+    const { id } = req.params;
+    const vid = await Video.findByIdAndDelete({ id });
+    if (!vid) throw new ApiError("unable to delete video ", 403);
+    return res.json({ msg: "video deleted" });
   } catch (error) {
+    res.json({ error });
     next(error);
   }
 };

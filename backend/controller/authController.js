@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { createToken } from "../utils/createToken.js";
+import { ApiError } from "../utils/apiError.js";
 
 export const signup = async (req, res, next) => {
   try {
@@ -18,10 +19,13 @@ export const signup = async (req, res, next) => {
     const token = await createToken(user._id);
     // console.log(token);
 
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: true,
-    });
+    const cookieOptions = {
+      httpOnly: true,   //js cant touch this
+      maxAge: 3 * 24 * 60 * 60 * 1000,  //3days
+      sameSite: 'lax',    
+      secure: process.env.NODE_ENV === 'production' //true for production send only in https
+    };
+    res.cookie("token", token, cookieOptions);
 
     return res.json({ msg: "signed in success" });
 
@@ -32,21 +36,29 @@ export const signup = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { email, password } = req.body;
-  if (!email || !password) res.json({ msg: "all feilds required" });
+  try {
+    const { email, password } = req.body;
+    console.log(`login email:${email}`);
+    if (!email || !password) throw new ApiError("all feilds required", 403 )
+  
+    const user = await User.findOne({ email });
+    if (!user) throw new ApiError("invalid email", 403)
+  
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) throw new ApiError('Incorrect password', 401)
+  
+    const token = await createToken(user._id);
 
-  const user = await User.findOne({ email });
-  if (!user) return res.json({ msg: "invalid email" });
-
-  const auth = await bcrypt.compare(password, user.password);
-  if (!auth) return res.json({ msg: "incorrect password" });
-
-  const token = await createToken(user._id);
-  res.cookie("token", token, {
-    httpOnly: false,
-    withCredentials: true,
-  });
-
-  return res.status(200).json({ msg: "user logged in successfully"  });
-  next();
+    const cookieOptions = {
+      httpOnly: true,   //js cant touch this
+      maxAge: 3 * 24 * 60 * 60 * 1000,  //3days
+      sameSite: 'none',    
+      secure: process.env.NODE_ENV === 'production' //true for production send only in https
+    };
+    res.cookie("token", token, cookieOptions);
+  
+    return res.status(200).json({ msg: "user logged in successfully" });
+  } catch (error) {
+    next(error)
+  }
 };
