@@ -20,10 +20,10 @@ export const signup = async (req, res, next) => {
     // console.log(token);
 
     const cookieOptions = {
-      httpOnly: true,   //js cant touch this
-      maxAge: 3 * 24 * 60 * 60 * 1000,  //3days
-      sameSite: 'lax',    
-      secure: process.env.NODE_ENV === 'production' //true for production send only in https
+      httpOnly: true, //js cant touch this
+      maxAge: 3 * 24 * 60 * 60 * 1000, //3days
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production", //true for production send only in https
     };
     res.cookie("token", token, cookieOptions);
 
@@ -39,28 +39,30 @@ export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     console.log(`login email:${email}`);
-    if (!email || !password) throw new ApiError("all feilds required", 403 )
-  
+    if (!email || !password) throw new ApiError("all feilds required", 403);
+
     const user = await User.findOne({ email });
-    if (!user) throw new ApiError("invalid email", 403)
-  
+    if (!user) throw new ApiError("invalid email", 403);
+
     const auth = await bcrypt.compare(password, user.password);
-    if (!auth) throw new ApiError('Incorrect password', 401)
-  
+    if (!auth) throw new ApiError("Incorrect password", 401);
+
     const token = await createToken(user._id);
-console.log(token);
+    console.log(token);
 
     const cookieOptions = {
-      httpOnly: true,   //js cant touch this  
-      // sameSite: 'none',   //for production same site none, 
-      maxAge: 3 * 24 * 60 * 60 * 1000,  //3days
-      secure: false //true for production send only in https
+      httpOnly: true, //js cant touch this
+      // sameSite: 'none',   //for production same site none,
+      maxAge: 3 * 24 * 60 * 60 * 1000, //3days
+      secure: false, //true for production send only in https
     };
     console.log(cookieOptions);
-     
-  
-    return res.status(200).cookie("token", token, cookieOptions).json({ msg: "user logged in successfully" });
+
+    return res
+      .status(200)
+      .cookie("token", token, cookieOptions)
+      .json({ msg: "user logged in successfully" });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
