@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyUser } from "../Middlewares/verifyUser.js";
+const router = express.Router();
 import {
   getAllUsers,
   getProfile,
@@ -12,8 +12,8 @@ import {
   like,
   dislike,
 } from "../controller/userController.js";
+import { verifyUser } from "../Middlewares/verifyUser.js";
 
-const router = express.Router();
 
 //getAllUsers - get All user detail
 router.get("/", getAllUsers);

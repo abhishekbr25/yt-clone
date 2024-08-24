@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
-import cookieParser from "cookie-parser";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 const app = express();
 const port = 3001;
 
@@ -11,13 +11,13 @@ connectdb();
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+app.use(cookieParser());
 app.use(
   cors({
     credentials: true, //allow cookies to be sent with req
-    origin: "http://127.0.0.1:5500 ",
+    origin: "http://localhost:5500 ",
   })
 );
-app.use(cookieParser());
 // app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -30,10 +30,7 @@ import videoRouter from "./routes/videoRoutes.js";
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/video", videoRouter);
-
-app.get("/", (req, res) => {
-  res.render("video");
-});
+ 
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -6,22 +6,23 @@ import { ApiError } from "../utils/apiError.js";
 export async function getAllUsers(req, res) {
   // const {user, ...user} = req
   // console.log({...user});
-  const user = await User.find({})
+  const user = await User.find({});
   if (!user) {
     return res.json({ success: false, msg: "unable to get users deatail" });
   }
   res.json({ user });
 }
 
-export function  getProfile(req, res) {
+export function getProfile(req, res, next) {
   // const {user, ...user} = req
   // console.log({...user});
   try {
     if (!req.user) {
-        throw new ApiError("unauthorised user access")
+      throw new ApiError("unauthorised user access");
     }
     return res.json(req.user);
   } catch (error) {
+    res.json(error) 
     next(error)
   }
 }
@@ -201,7 +202,7 @@ export async function deleteUser(req, res) {
       return res.json({ success: false, msg: "incorrect password" });
 
     const user = await User.findByIdAndDelete(req.user._id);
-    res.clearCookies
+    res.clearCookies;
     return res.json({ success: true, msg: "user account deleted" });
   } catch (error) {
     console.log(error);

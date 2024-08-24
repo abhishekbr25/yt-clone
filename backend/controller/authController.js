@@ -48,16 +48,18 @@ export const login = async (req, res, next) => {
     if (!auth) throw new ApiError('Incorrect password', 401)
   
     const token = await createToken(user._id);
+console.log(token);
 
     const cookieOptions = {
-      httpOnly: true,   //js cant touch this
+      httpOnly: true,   //js cant touch this  
+      // sameSite: 'none',   //for production same site none, 
       maxAge: 3 * 24 * 60 * 60 * 1000,  //3days
-      sameSite: 'none',    
-      secure: process.env.NODE_ENV === 'production' //true for production send only in https
+      secure: false //true for production send only in https
     };
-    res.cookie("token", token, cookieOptions);
+    console.log(cookieOptions);
+     
   
-    return res.status(200).json({ msg: "user logged in successfully" });
+    return res.status(200).cookie("token", token, cookieOptions).json({ msg: "user logged in successfully" });
   } catch (error) {
     next(error)
   }

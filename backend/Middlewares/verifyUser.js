@@ -5,8 +5,7 @@ import { ApiError } from "../utils/apiError.js";
 export async function verifyUser(req, res, next) {
   try {
     // console.log(`verifyUser req.cookie: ${req.cookies}`);
-    console.log(req.headers);
-    
+    // console.log(` req.cookies: ${req.cookies}`);    
     const token = req.cookies.token
     console.log(`token : ${token}`)
     if (!token) throw new ApiError("Token not found", 401);
@@ -23,7 +22,6 @@ export async function verifyUser(req, res, next) {
     req.user = user;
     next();
   } catch (error) {
-    res.json({error})
-      // next(error);
+    return res.json(error) 
   }
 }
