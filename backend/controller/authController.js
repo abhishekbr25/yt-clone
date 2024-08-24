@@ -22,7 +22,7 @@ export const signup = async (req, res, next) => {
     const cookieOptions = {
       httpOnly: true, //js cant touch this
       maxAge: 3 * 24 * 60 * 60 * 1000, //3days
-      sameSite: "lax",
+      // sameSite: "lax", refer login cookie opt
       secure: process.env.NODE_ENV === "production", //true for production send only in https
     };
     res.cookie("token", token, cookieOptions);

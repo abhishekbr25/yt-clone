@@ -1,11 +1,29 @@
- 
-
 function getAllUsers() {
   fetch("http://localhost:3001/api/user")
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
+ 
+function setCredentials(button) {
+  // Find the parent div of the clicked button
+  const parentDiv = button.closest("div");
 
+  // Find the input elements within the same parent div
+  const emailInput = parentDiv.querySelector('input[name="email"]');
+  const passwordInput = parentDiv.querySelector('input[name="password"]');
+  const usernameInput = parentDiv.querySelector('input[name="username"]');
+
+  // Set the test credentials
+  if (usernameInput) {
+    usernameInput.value = "user1" + `${Math.floor(Math.random() * 10000)}`;
+    emailInput.value = "user1" + `${Math.floor(Math.random() * 10000)}`;
+    passwordInput.value = "user1" + `${Math.floor(Math.random() * 10000)}`;
+    return
+  }
+  
+  emailInput.value = "user1";
+  passwordInput.value = "user1"; 
+}
 const signupForm = document.querySelector(".signup-form");
 signupForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -36,11 +54,11 @@ loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const logindata = new FormData(loginForm);
   const loginObj = Object.fromEntries(logindata.entries());
-  fetch("https://localhost:3001/api/auth/login", {
+  fetch("http://localhost:3001/api/auth/login", {
     method: "Post",
     credentials: "include",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json", 
     },
     body: JSON.stringify(loginObj),
   })
@@ -59,3 +77,15 @@ function getUserDetail() {
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
+
+function getProfile() {
+  fetch("http://localhost:3001/api/user/profile", {
+    method: "GET",
+    credentials: "include",  // This ensures cookies are sent with the request
+    
+  })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Error:", error));
+}
+
