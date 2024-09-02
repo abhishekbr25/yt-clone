@@ -3,7 +3,7 @@ import { FeedContainer } from "../components/FeedContainer";
 
 export function Feed() {
   return (
-    <div className="bg-neutral-900 h-screen">
+    <div className="bg-neutral-900 h-screen ">
       <AppBar />
       <FeedContainer/>
     </div>

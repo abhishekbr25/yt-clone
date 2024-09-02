@@ -2,7 +2,7 @@ import { SearchBar } from "./SearchBar";
 
 export function AppBar() {
   return (
-    <div className="flex justify-between items-center bg-neutral-800 text-white h-14">
+    <div className="sticky top-0 flex justify-between items-center bg-neutral-800 text-white h-14">
       <div>LOGO</div>
       <SearchBar />
       <div className="">
@@ -15,3 +15,4 @@ export function AppBar() {
 }
 
 // others (in order)- chat, createpost, profile
+//sticky top-0 -> make it fixed to top
