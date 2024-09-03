@@ -1,7 +1,33 @@
 * {
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 body {
   margin: 0;
   padding: 0;
+}
+
+.feed {
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  grid-template-areas:
+    "navbar navbar"
+    "aside main";
+  height: 100vh;
+}
+
+nav {
+  color: yellow;
+  grid-area: navbar;
+  position: sticky;
+  top: 0; 
+}
+
+aside {
+  grid-area: aside;
+  position: fixed;
+  top: 73px;
+}
+
+main {
+  grid-area: main;
 }
