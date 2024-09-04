@@ -3,7 +3,7 @@
 }
 body {
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
 .feed {
@@ -21,7 +21,7 @@ nav {
   grid-area: navbar;
   position: sticky;
   top: 0;  
-  background: #654d4d;
+  /* background: #654d4d; */
 }
 
 aside {
@@ -30,7 +30,7 @@ aside {
   align-self: start;
   top:56px;
   height: calc(100vh - 56px); 
-  background: #72668a;
+  /* background: #72668a; */
   overflow-y: scroll;
 }
 
@@ -44,5 +44,5 @@ aside::-webkit-scrollbar-thumb{
 
 main {
   grid-area: main;
-  background: #c27979;
+  /* background: #c27979; */
 }

@@ -2,7 +2,7 @@ import { SearchBar } from "./SearchBar";
 
 export function AppBar() {
   return (
-    <nav className="flex justify-between items-center bg-neutral-800 h-14">
+    <nav className="flex justify-between items-center bg-neutral-800  h-14">
       <div>LOGO</div>
       <SearchBar />
       <div className="">

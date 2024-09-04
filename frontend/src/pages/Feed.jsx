@@ -3,7 +3,7 @@ import { PostGrid } from "../components/PostGrid";
 import { SideBar } from "../components/SideBar";
 export function Feed() {
   return (
-    <div className="feed">
+    <div className="feed bg-neutral-900 text-slate-300">
       <nav>
         <AppBar />
       </nav>
