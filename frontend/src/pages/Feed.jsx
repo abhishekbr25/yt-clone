@@ -1,13 +1,14 @@
-import { AppBar } from "../components/Appbar"; 
+import { useRef } from "react";
+import { AppBar } from "../components/Appbar";
 import { PostGrid } from "../components/PostGrid";
 import { SideBar } from "../components/SideBar";
-export function Feed() {
+export function Feed() {    
   return (
-    <div className="feed bg-neutral-900 text-slate-300">
+    <div className="feed bg-neutral-900  text-slate-300 ">
       <nav>
         <AppBar />
       </nav>
-      <aside>
+      <aside >
         <SideBar />
       </aside>
       <main>
@@ -18,4 +19,4 @@ export function Feed() {
 }
 // neutral-900
 
-<div className="flex justify-between "></div>;
+ 

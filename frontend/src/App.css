@@ -16,8 +16,7 @@ body {
   min-height: 100vh;
 }
 
-nav {
-  color: yellow;
+nav { 
   grid-area: navbar;
   position: sticky;
   top: 0;  
@@ -44,5 +43,20 @@ aside::-webkit-scrollbar-thumb{
 
 main {
   grid-area: main;
-  /* background: #c27979; */
+  background: #c27979;
+}
+
+@media (max-width: 750px){
+  .feed{
+    grid-template-columns: 1fr ;
+  }
+  aside{
+    background: #00000041;
+    position: fixed;
+    width: 250px;
+    display: none;
+  }
+  .show{
+    display: visible;
+  }
 }
