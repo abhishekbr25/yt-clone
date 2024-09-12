@@ -20,29 +20,41 @@ nav {
   color: yellow;
   grid-area: navbar;
   position: sticky;
-  top: 0;  
-  /* background: #654d4d; */
+  top: 0;
+  background: #654d4d;
 }
 
 aside {
   grid-area: aside;
-  position: sticky; 
+  position: sticky;
   align-self: start;
-  top:56px;
-  height: calc(100vh - 56px); 
-  /* background: #72668a; */
+  top: 56px;
+  height: calc(100vh - 56px);
+  background: #72668a;
   overflow-y: scroll;
 }
-
-aside::-webkit-scrollbar{
+aside::-webkit-scrollbar {
   width: 6px;
 }
-
-aside::-webkit-scrollbar-thumb{
+aside::-webkit-scrollbar-thumb {
   background: rgb(58, 55, 55);
 }
 
 main {
   grid-area: main;
   /* background: #c27979; */
+}
+
+@media (max-width: 1024px) {
+  .feed {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "navbar"
+      "main";
+  }
+  aside {
+    background: #000000;
+    position: fixed;
+    width: 250px;
+  }
 }
