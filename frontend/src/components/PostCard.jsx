@@ -15,8 +15,16 @@ export function PostCard({ src }) {
 
   return (
     <div className="bg-slate-900 max-w-4xl mx-auto mb-4 py-4 rounded-xl">
+      <div className="channelDetails px-7 pb-4">
+        <div className="channelName flex gap-3 items-center">
+          <div className="profilepic w-10 h-10 rounded-full overflow-hidden ">
+            <img src="/profic.png" />
+          </div>
+          <div className="userName text-gray-200">username</div>
+        </div>
+      </div>
       <div className="flex flex-col items-center gap-3 max-w-xl mx-auto">
-        <div className="actualpost ">
+        <div className="postImg ">
           {/* post form backend */}
           <div className=" bg-black ">
             <img src={src} className="w-[720px] h-[480px] object-contain" />
@@ -32,7 +40,7 @@ export function PostCard({ src }) {
               />
             </div>
             <div>
-              <MessageSquare />
+              <MessageSquare color="grey" />
             </div>
           </div>
           <div>
