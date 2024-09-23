@@ -3,7 +3,7 @@
 }
 body {
   margin: 0;
-  padding: 0; 
+  padding: 0;
 }
 
 .feed {
@@ -42,7 +42,8 @@ aside::-webkit-scrollbar-thumb {
 
 main {
   grid-area: main;
-  /* background: #c27979; */
+  /*height: calc(100vh - 56px);*/
+  background: #827979;
 }
 
 @media (max-width: 1024px) {
@@ -53,7 +54,7 @@ main {
       "main";
   }
   aside {
-    background: #000000;
+    /*background: #000000;*/
     position: fixed;
     width: 250px;
   }

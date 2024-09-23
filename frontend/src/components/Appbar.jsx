@@ -1,3 +1,4 @@
+//not in use
 import { SearchBar } from "./SearchBar";
 
 export function AppBar() {
@@ -8,7 +9,7 @@ export function AppBar() {
       <div className="">
         <span>chat </span>
         <span>post </span>
-        <span>profile |  Signup</span>
+        <span>profile | Signup</span>
       </div>
     </nav>
   );
@@ -16,3 +17,4 @@ export function AppBar() {
 
 // others (in order)- chat, createpost, profile
 //sticky top-0 -> make it fixed to top
+
