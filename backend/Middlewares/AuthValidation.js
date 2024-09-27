@@ -8,7 +8,7 @@ export const signUpValidation = (req, res, next) => {
   });
   try {
     const { error } = signupSchema.safeParse(req.body);
-    if (error) return res.status(400).json({ message: "bad request", error });
+    if (error) return res.status(400).json({ msg: "bad request", error });
     next();
   } catch (err) {
     console.log(err);
@@ -21,7 +21,7 @@ export const loginValidation = (req, res, next) => {
   });
   try {
     const { error } = loginSchema.safeParse(req.body);
-    if (error) return res.status(400).json({ message: "bad request", error });
+    if (error) return res.status(400).json({ msg: "bad request", error });
     next();
   } catch (err) {
     console.log(err);

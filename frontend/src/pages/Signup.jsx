@@ -5,7 +5,7 @@ import { InputBox } from "../components/Inputbos";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils/toast";
 export function Signup() {
-  const [loginInfo, setLoginInfo] = useState({
+  const [signupInfo, setSignupInfo] = useState({
     username: "",
     email: "",
     password: "",
@@ -14,28 +14,30 @@ export function Signup() {
   const handleChange = (e) => {
     // console.log(e.target.value);
     const { name, value } = e.target;
-    const loginData = { ...loginInfo };
-    loginData[name] = value;
-    setLoginInfo(loginData);
-    console.log(loginData);
-    return;
+    const signupData = { ...signupInfo };
+    signupData[name] = value;
+    setSignupInfo(signupData);
+    console.log(signupData);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    const { username, email, password } = loginInfo;
+    const { username, email, password } = signupInfo;
     if (!username || !email || !password)
       return handleError("all fields are required");
-    // console.log(loginInfo);
+    // console.log(signupInfo);
     try {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginInfo),
+        body: JSON.stringify(signupInfo),
       });
       const result = await response.json();
-      console.log(result);
+      // console.log(response.status);
+      if (response.status === 200)
+        return handleSuccess("user signup successfull");
+      if (result.status !== 200) return handleError(result.msg);
     } catch (error) {
       return handleError(error);
     }
@@ -66,7 +68,7 @@ export function Signup() {
         <p>
           Already have an account.
           <u>
-            <a href="/login">Login</a>
+            <a href="/signup">Login</a>
           </u>
         </p>
       </div>

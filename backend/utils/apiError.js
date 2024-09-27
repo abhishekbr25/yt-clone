@@ -5,10 +5,9 @@
 // }
 
 export class ApiError extends Error {
-  constructor(msg, statuscode = 500) {
+  constructor(msg, status = 500) {
     super(msg);
-    this.msg = msg
-    this.statuscode = statuscode;
+    this.msg = msg;
+    this.status = status;
   }
 }
- 

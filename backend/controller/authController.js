@@ -11,7 +11,7 @@ export const signup = async (req, res, next) => {
       return res.json({ msg: "all credential required" });
 
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.json({ msg: "existing user" });
+    if (existingUser) return res.status(400).json({ msg: "existing user" });
 
     const user = await User.create({ email, username, password });
 
@@ -27,7 +27,7 @@ export const signup = async (req, res, next) => {
     };
     res.cookie("token", token, cookieOptions);
 
-    return res.json({ msg: "signed in success" });
+    return res.status(200).json({ msg: "signed in success" });
 
     next();
   } catch (error) {
@@ -38,7 +38,7 @@ export const signup = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log(`login email:${email}`);
+    // console.log(`login email:${email}`);
     if (!email || !password) throw new ApiError("all feilds required", 403);
 
     const user = await User.findOne({ email });
@@ -48,7 +48,7 @@ export const login = async (req, res, next) => {
     if (!auth) throw new ApiError("Incorrect password", 401);
 
     const token = await createToken(user._id);
-    console.log(token);
+    // console.log(token);
 
     const cookieOptions = {
       httpOnly: true, //js cant touch this
@@ -56,13 +56,14 @@ export const login = async (req, res, next) => {
       maxAge: 3 * 24 * 60 * 60 * 1000, //3days
       secure: false, //true for production send only in https
     };
-    console.log(cookieOptions);
+    // console.log(cookieOptions);
 
     return res
       .status(200)
       .cookie("token", token, cookieOptions)
       .json({ msg: "user logged in successfully" });
   } catch (error) {
-    next(error);
+    // next(error);
+    return res.status(400).json(error);
   }
 };

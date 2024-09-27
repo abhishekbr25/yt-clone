@@ -15,6 +15,7 @@ export const handleSuccess = (msg) => {
 };
 
 export const handleError = (msg) => {
+  console.log("toast-handleError");
   toast.error(msg, {
     position: "top-right",
     autoClose: 2000,
