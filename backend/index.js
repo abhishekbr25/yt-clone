@@ -15,8 +15,8 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true, //allow cookies to be sent with req
-    origin: "http://localhost:5500 ",
-  })
+    origin: "*",
+  }),
 );
 // app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -30,7 +30,6 @@ import videoRouter from "./routes/videoRoutes.js";
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/video", videoRouter);
- 
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
