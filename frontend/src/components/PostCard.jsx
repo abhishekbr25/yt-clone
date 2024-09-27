@@ -30,7 +30,6 @@ export function PostCard({ src }) {
         <div className=" bg-black aspect-square w-[350px] md:w-[500px] flex justify-between items-center">
           <img src={src} className="object-contain w-full " />
         </div>
-        {/* </div> */}
         <div className="userInteractivityIcons flex justify-between w-full text-white px-2">
           <div className="text-red-900 flex w-1/5 justify-between">
             <div>

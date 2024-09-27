@@ -14,24 +14,30 @@ export default function PostCard2({ src, title }) {
   }, []);
 
   return (
-    <div className="postCard bg-blue-800 mb-4 py-2 rounded-xl max-w-xl overflow-hidden mx-auto ">
+    <div className="postCard bg-blue-800 mb-4 py-2 rounded-xl overflow-hidden mx-auto ">
       {/* User Details */}
-      <div className="UserDetails px-6 pb-1">
+      <div className="UserDetails px-4 pb-1">
         <div className="channelName flex gap-3 items-center">
           {/* Profile Picture */}
-          <div className="profilepic w-10 h-10 rounded-full overflow-hidden">
+          <div className="profilepic w-8 h-8 rounded-full overflow-hidden">
             <img src="/profic.png" alt="Profile" />
           </div>
           {/* Username */}
-          <div className="userName text-gray-200 text-s">username</div>
+          <div className="userName text-gray-300 text-sm">username</div>
         </div>
       </div>
 
-      <div className="text-s text-white pb-2 pl-3 font-bold">
-        {title ? title : "random title set by developer"}
+      <div className="text-s text-white pb-2 px-3 font-bold">
+        {title ? (
+          title
+        ) : (
+          <div className="w-[92%]">
+            1234567891asldfjlsjflasjdf;asd234567789123456756789
+          </div>
+        )}
       </div>
 
-      <div className="w-[350px] h-[350px] md:w-[500px] md:h-[500px] bg-black ">
+      <div className="w-[350px] h-[350px] md:w-[500px] lg:w-[600px] lg:h-[500px] bg-black ">
         <img
           src={src}
           className="w-full h-full object-contain object-center "
