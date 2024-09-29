@@ -4,12 +4,19 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/Inputbos";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils/toast";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hook/useAuth";
+
 export function Signup() {
   const [signupInfo, setSignupInfo] = useState({
     username: "",
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
+
   // method 2 https://www.youtube.com/watch?v=SaEc7jLWvGY
   const handleChange = (e) => {
     // console.log(e.target.value);
@@ -19,6 +26,7 @@ export function Signup() {
     setSignupInfo(signupData);
     console.log(signupData);
   };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const { username, email, password } = signupInfo;
@@ -35,9 +43,14 @@ export function Signup() {
         body: JSON.stringify(signupInfo),
       });
       const result = await response.json();
-      console.log(response);
-      if (response.status === 200)
-        return handleSuccess("user signup successfull");
+      // console.log(result);
+      if (response.status === 200) {
+        dispatch({ type: "SIGNED_IN", payload: result.user });
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+        return handleSuccess(result.msg);
+      }
       return handleError(result.msg);
     } catch (error) {
       return handleError(error);

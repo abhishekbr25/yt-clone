@@ -15,7 +15,7 @@ export const signup = async (req, res, next) => {
 
     const user = await User.create({ email, username, password });
 
-    if (!user) res.json({ msg: "signup failed" });
+    if (!user) return res.status(500).json({ msg: "signup failed" });
     const token = await createToken(user._id);
     // console.log(token);
 
@@ -27,11 +27,11 @@ export const signup = async (req, res, next) => {
     };
     res.cookie("token", token, cookieOptions);
 
-    return res.status(200).json({ msg: "signed in success" });
+    return res.status(200).json({ msg: "signed in success", user: user.email });
 
     next();
   } catch (error) {
-    next();
+    return res.status(500).json({ msg: "server error", error });
   }
 };
 
@@ -61,7 +61,7 @@ export const login = async (req, res, next) => {
     return res
       .status(200)
       .cookie("token", token, cookieOptions)
-      .json({ msg: "user logged in successfully" });
+      .json({ msg: "user logged in successfully", user: user.email });
   } catch (error) {
     // next(error);
     return res.status(400).json(error);

@@ -4,7 +4,8 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/Inputbos";
 import { handleError, handleSuccess } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
-import { AuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../hook/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -12,8 +13,8 @@ export function Login() {
     password: "",
   });
 
-  const { dispatch } = useContext(AuthContext);
-
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
   const changeHandler = (e) => {
     const { name, value } = e.target;
     const loginData = { ...loginInfo };
@@ -40,7 +41,10 @@ export function Login() {
       // console.log(result);
       if (response.status === 200) {
         //dispatch login here in authcontext
-        dispatch({ type: "LOGIN", payload: true });
+        dispatch({ type: "SIGNED_IN", payload: result.user });
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
         return handleSuccess(result.msg);
       }
       return handleError(result.msg);

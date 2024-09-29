@@ -3,11 +3,13 @@ import { PostGrid } from "../components/PostGrid";
 import { SideBar } from "../components/SideBar";
 import { Menu } from "lucide-react";
 import { SearchBar } from "../components/SearchBar";
+import { useAuthContext } from "../hook/useAuth";
 
 export function Feed() {
   // const [isOpen, setIsOpen] = useState(window.innerWidth>=1024 ? true : false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
+  const { state } = useAuthContext();
   const hamburgerClickHandler = useCallback(() => {
     setIsOpen(!isOpen);
   }, [isOpen]);
@@ -37,7 +39,7 @@ export function Feed() {
           <SearchBar />
         </div>
 
-        {!isAuthenticated ? (
+        {!state.user ? (
           <div>Signup</div>
         ) : (
           <div>
