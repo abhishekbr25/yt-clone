@@ -28,16 +28,17 @@ export function Signup() {
     try {
       const response = await fetch("/api/auth/signup", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(signupInfo),
       });
       const result = await response.json();
-      // console.log(response.status);
+      console.log(response);
       if (response.status === 200)
         return handleSuccess("user signup successfull");
-      if (result.status !== 200) return handleError(result.msg);
+      return handleError(result.msg);
     } catch (error) {
       return handleError(error);
     }

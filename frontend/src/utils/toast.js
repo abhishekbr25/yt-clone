@@ -3,10 +3,10 @@ import { toast } from "react-toastify";
 export const handleSuccess = (msg) => {
   toast.success(msg, {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "dark",
@@ -15,10 +15,10 @@ export const handleSuccess = (msg) => {
 };
 
 export const handleError = (msg) => {
-  console.log("toast-handleError");
+  // console.log("toast-handleError");
   toast.error(msg, {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 2500,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
