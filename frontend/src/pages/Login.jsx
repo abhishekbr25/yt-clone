@@ -36,9 +36,14 @@ export function Login() {
         },
         body: JSON.stringify(loginInfo),
       });
-      const result = await response.json();
-      // console.log(response);
-      // console.log(result);
+      if (response.status === 500) {
+        return handleError("Unfortunatly Server is Down 🥹");
+      }
+      const result = await response?.json();
+      console.log("result", result);
+      if (!response) {
+        return handleError("server error");
+      }
       if (response.status === 200) {
         //dispatch login here in authcontext
         setTimeout(() => {
@@ -50,7 +55,7 @@ export function Login() {
       }
       return handleError(result.msg);
     } catch (err) {
-      console.log(err);
+      console.log("err: ", err);
       return handleError(err);
     }
   };

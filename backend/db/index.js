@@ -8,6 +8,6 @@ export const connectdb = async () => {
     await mongoose.connect(process.env.mongo);
     console.log(`${pc.green("Mongo Connected")}`);
   } catch (error) {
-    console.log("database connection failed: \n" + error);
+    console.log(`${pc.red("database connection failed: \n")}` + error);
   }
 };

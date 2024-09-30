@@ -4,7 +4,7 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/Inputbos";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils/toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hook/useAuth";
 
 export function Signup() {
@@ -42,8 +42,10 @@ export function Signup() {
         },
         body: JSON.stringify(signupInfo),
       });
-      const result = await response.json();
-      // console.log(result);
+      const result = await response?.json();
+      if (response.status === 500) {
+        return handleError("Unfortunately Server is Down 🥹");
+      }
       if (response.status === 200) {
         dispatch({ type: "SIGNED_IN", payload: result.user });
         setTimeout(() => {
@@ -53,7 +55,8 @@ export function Signup() {
       }
       return handleError(result.msg);
     } catch (error) {
-      return handleError(error);
+      // return handleError(error);
+      console.log(error);
     }
   };
   return (
@@ -82,7 +85,7 @@ export function Signup() {
         <p>
           Already have an account.
           <u>
-            <a href="/signup">Login</a>
+            <Link to="/signup">Login</Link>
           </u>
         </p>
       </div>
