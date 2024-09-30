@@ -67,3 +67,15 @@ export const login = async (req, res, next) => {
     return res.status(400).json(error);
   }
 };
+
+export const logout = (req, res) => {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: false,
+    maxAge: 0,
+  };
+  return res
+    .status(200)
+    .cookie("token", "", cookieOptions)
+    .json({ msg: "user logged out" });
+};

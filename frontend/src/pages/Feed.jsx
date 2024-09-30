@@ -4,12 +4,15 @@ import { SideBar } from "../components/SideBar";
 import { Menu } from "lucide-react";
 import { SearchBar } from "../components/SearchBar";
 import { useAuthContext } from "../hook/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export function Feed() {
   // const [isOpen, setIsOpen] = useState(window.innerWidth>=1024 ? true : false);
   // const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
   const { state } = useAuthContext();
+  const navigate = useNavigate();
+  console.log("state.user : ", state.user);
   const hamburgerClickHandler = useCallback(() => {
     setIsOpen(!isOpen);
   }, [isOpen]);
@@ -18,6 +21,7 @@ export function Feed() {
     const handleResize = () => {
       setIsOpen(window.innerWidth >= 1024);
     };
+    console.log("rerun");
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -40,7 +44,13 @@ export function Feed() {
         </div>
 
         {!state.user ? (
-          <div>Signup</div>
+          <button
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Signup
+          </button>
         ) : (
           <div>
             <span>chat </span>

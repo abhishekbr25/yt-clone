@@ -1,10 +1,10 @@
-export function SideBarButton({ label, iconSrc, href }) {
+export function SideBarButton({ label, iconSrc, onClick }) {
   return (
     <div className="flex justify-start items-center hover:bg-neutral-800 p-1 pl-3 m-1 rounded-lg text-white">
       <img src={iconSrc} alt="" />
-      <a className=" mx-2 my-1" href={href}>
+      <button className=" mx-2 my-1" onClick={onClick}>
         {label}
-      </a>
+      </button>
     </div>
   );
 }

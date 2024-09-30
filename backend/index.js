@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import pc from "picocolors";
 const app = express();
 const port = 3001;
 
@@ -32,5 +33,6 @@ app.use("/api/user", userRouter);
 app.use("/api/video", videoRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on port ${pc.green(`${port}`)}`);
+  // console.log(`Example app listening on port ${port}`);
 });

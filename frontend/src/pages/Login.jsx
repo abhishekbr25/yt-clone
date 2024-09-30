@@ -41,8 +41,9 @@ export function Login() {
       // console.log(result);
       if (response.status === 200) {
         //dispatch login here in authcontext
-        dispatch({ type: "SIGNED_IN", payload: result.user });
         setTimeout(() => {
+          //setTimeout to render toast then dispatch action which results state.user != null
+          dispatch({ type: "SIGNED_IN", payload: result.user });
           navigate("/");
         }, 1500);
         return handleSuccess(result.msg);
