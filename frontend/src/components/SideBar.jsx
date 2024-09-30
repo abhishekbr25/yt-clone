@@ -3,7 +3,7 @@ import { useAuthContext } from "../hook/useAuth";
 import { SideBarButton } from "./SideBarButton";
 
 export function SideBar() {
-  const { dispatch } = useAuthContext();
+  const { state, dispatch } = useAuthContext();
   const navigate = useNavigate();
   async function logoutHandler() {
     console.log("logout clicked");
@@ -35,11 +35,13 @@ export function SideBar() {
       </div>
       <hr className="mx-5" />
       <div className="button-box ml-8 my-5 flex flex-col justify-between text-red-400">
-        <SideBarButton
-          label={"logout"}
-          onClick={logoutHandler}
-          iconSrc={"/search-icon.svg"}
-        />
+        {state.user && (
+          <SideBarButton
+            label={"logout"}
+            onClick={logoutHandler}
+            iconSrc={"/search-icon.svg"}
+          />
+        )}
       </div>
     </div>
   );

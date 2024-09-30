@@ -39,3 +39,4 @@ export const AuthContextProvider = ({ children }) => {
 
 //https://youtu.be/64RiVcXhxN0?si=Stx5fFo5uGZzNi7T&t=387
 //https://www.youtube.com/watch?v=awGFsGc9oCM
+//https://legacy.reactjs.org/docs/hooks-reference.html#lazy-initialization

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
 import { InputBox } from "../components/Inputbos";
@@ -40,7 +40,7 @@ export function Login() {
         return handleError("Unfortunatly Server is Down 🥹");
       }
       const result = await response?.json();
-      console.log("result", result);
+      // console.log("result", result);
       if (!response) {
         return handleError("server error");
       }
