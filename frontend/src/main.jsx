@@ -4,11 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import "react-toastify/ReactToastify.css";
 import { AuthContextProvider } from "./context/AuthContext";
+import { MainPageContextProvider } from "./context/MainContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthContextProvider>
-      <App />
+      <MainPageContextProvider>
+        <App />
+      </MainPageContextProvider>
     </AuthContextProvider>
   </StrictMode>,
 );

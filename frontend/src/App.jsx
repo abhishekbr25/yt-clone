@@ -5,6 +5,7 @@ import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
 import { Upload } from "./pages/Upload";
 import { useAuthContext } from "./hook/useAuth";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   // const state.user = localStorage.getItem("user");
@@ -21,11 +22,13 @@ function App() {
           path="/login"
           element={state.user ? <Navigate to={"/"} /> : <Login />}
         />
-        <Route
-          path="/feed"
-          element={!state.user ? <Navigate to={"/login"} /> : <Feed />}
-        ></Route>
-        {/* <Route path="/upload" element={<Upload />} /> */}
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/feed" element={<Upload />} exact>
+            <Route path="upload" element={<Upload />} />
+          </Route>
+        </Route>
+
         <Route path="/" element={<Feed />} />
       </Routes>
     </BrowserRouter>

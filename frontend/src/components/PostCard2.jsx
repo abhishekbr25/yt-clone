@@ -12,22 +12,24 @@ export default function PostCard2({ src, title }) {
   const toggleBookmarked = useCallback(() => {
     setIsBookmarked((prevState) => !prevState);
   }, []);
-
+  //    {
+  //     profilePic, username, title, postImage, (isLiked & isbookmarked form backend)
+  //   }
   return (
-    <div className="postCard bg-blue-800 mb-4 py-2 min-w-[300px] max-w-[600px] rounded-xl mx-auto ">
+    <div className="postCard bg-blue-800 mx-2 my-3 py-2 min-w-[300px] max-w-[600px] rounded-lg  ">
       {/* User Details */}
-      <div className="UserDetails px-4 pb-1">
+      <div className="UserDetails px-4 py-1">
         <div className="channelName flex gap-3 items-center">
           {/* Profile Picture */}
           <div className="profilepic w-8 h-8 rounded-full overflow-hidden">
             <img src="/profic.png" alt="Profile" />
           </div>
           {/* Username */}
-          <div className="userName text-gray-300 text-sm">username</div>
+          <div className="userName text-gray-300 text-md">username</div>
         </div>
       </div>
 
-      <div className="text-s text-white pb-2 px-3 font-bold">
+      <div className="text-s text-white pb-2 px-2 font-bold">
         {title ? (
           title
         ) : (

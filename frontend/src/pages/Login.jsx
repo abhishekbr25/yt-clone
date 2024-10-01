@@ -19,7 +19,7 @@ export function Login() {
     const loginData = { ...loginInfo };
     loginData[name] = value;
     setLoginInfo(loginData);
-    console.log(loginData);
+    // console.log(loginData);
   };
 
   const loginHandler = async (e) => {
