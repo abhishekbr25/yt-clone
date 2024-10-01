@@ -17,4 +17,4 @@ export function AppBar() {
 
 // others (in order)- chat, createpost, profile
 //sticky top-0 -> make it fixed to top
-
+// this is depricated , go to feed.jsx

@@ -5,14 +5,13 @@ import { InputBox } from "../components/Inputbos";
 import { handleError, handleSuccess } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
 import { useAuthContext } from "../hook/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
-
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   const changeHandler = (e) => {
@@ -80,7 +79,7 @@ export function Login() {
         <p>
           Create a new Account
           <u>
-            <a href="/signup">Signup</a>
+            <Link to="/signup">Signup</Link>
           </u>
         </p>
       </div>

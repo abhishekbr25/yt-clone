@@ -85,7 +85,7 @@ export function Signup() {
         <p>
           Already have an account.
           <u>
-            <Link to="/signup">Login</Link>
+            <Link to="/login">Login</Link>
           </u>
         </p>
       </div>

@@ -14,7 +14,7 @@ export default function PostCard2({ src, title }) {
   }, []);
 
   return (
-    <div className="postCard bg-blue-800 mb-4 py-2 rounded-xl overflow-hidden mx-auto ">
+    <div className="postCard bg-blue-800 mb-4 py-2 min-w-[300px] max-w-[600px] rounded-xl mx-auto ">
       {/* User Details */}
       <div className="UserDetails px-4 pb-1">
         <div className="channelName flex gap-3 items-center">
@@ -31,13 +31,14 @@ export default function PostCard2({ src, title }) {
         {title ? (
           title
         ) : (
-          <div className="w-[92%]">
-            1234567891asldfjlsjflasjdf;asd234567789123456756789
-          </div>
+          <p>
+            this is a title set by developer just to check if it exceeds the
+            preset width
+          </p>
         )}
       </div>
 
-      <div className="w-[350px] h-[350px] md:w-[500px] lg:w-[600px] lg:h-[500px] bg-black ">
+      <div className="min-w-[300px] h-[350px] md:min-w-[500px] lg:w-[600px] lg:h-[500px] bg-black ">
         <img
           src={src}
           className="w-full h-full object-contain object-center "

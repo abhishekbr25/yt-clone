@@ -21,7 +21,7 @@ export function Feed() {
     const handleResize = () => {
       setIsOpen(window.innerWidth >= 1024);
     };
-    console.log("rerun");
+    // console.log("rerun");
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
