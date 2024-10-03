@@ -16,7 +16,7 @@ export function SideBar() {
       credentials: "include",
     });
     // const result = await response.json();
-    console.log(response);
+    // console.log(response);
     if (response.status === 200) {
       dispatch({ type: "SIGNED_OUT" });
       navigate("/");
@@ -25,7 +25,7 @@ export function SideBar() {
 
   return (
     <div className="flex flex-col justify-between ">
-      <div className="button-box ml-8 my-5 flex flex-col justify-between ">
+      <div className="button-box m-5 flex flex-col justify-between ">
         {mainButtons.map((btn) => (
           <SideBarButton
             key={btn.label}
@@ -39,8 +39,8 @@ export function SideBar() {
       </div>
 
       <hr className="mx-5" />
-      <div className="button-box ml-8 my-5 flex flex-col justify-between  ">
-        {mainButtons.map((btn) => (
+      <div className="button-box m-5 flex flex-col justify-between  ">
+        {secondaryButtons.map((btn) => (
           <SideBarButton
             key={btn.label}
             label={btn.label}
@@ -51,32 +51,34 @@ export function SideBar() {
           />
         ))}
       </div>
-      <div className="button-box ml-8 my-5 flex flex-col justify-between text-red-400">
-        {state.user && (
-          <>
-            <hr className="mx-5" />
+
+      {state.user && (
+        <>
+          <hr className="mx-5" />
+          <div className="button-box ml-8 my-5 flex flex-col justify-between text-red-400">
             <SideBarButton
               label={"logout"}
               onClick={logoutHandler}
               iconSrc={"/search-icon.svg"}
             />
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
-
-const mainButtons = [
-  { label: "Home", type: "HOME", iconSrc: "/search-icon.svg" },
+//signed in user can access secondary buttons
+const secondaryButtons = [
+  { label: "You", type: "HOME", iconSrc: "/search-icon.svg" },
   { label: "Liked", type: "LIKED", iconSrc: "/search-icon.svg" },
   { label: "Saved", type: "SAVED", iconSrc: "/search-icon.svg" },
-  { label: "Live", type: "LIVE", iconSrc: "/search-icon.svg" },
+  { label: "Upload", type: "UPLOAD", iconSrc: "/search-icon.svg" },
 ];
 
-const secondaryButtons = [
-  { label: "Recent Liked" },
-  { label: "Newsletter" },
-  { label: "Space" },
-  { label: "Live" },
+const mainButtons = [
+  { label: "tweets", type: "HOME", iconSrc: "/search-icon.svg" },
+  { label: "Newsletter", type: "HOME", iconSrc: "/search-icon.svg" },
+  { label: "Space", type: "HOME", iconSrc: "/search-icon.svg" },
+  { label: "Live", type: "HOME", iconSrc: "/search-icon.svg" },
 ];
+//you page - only followed post, tweets, and newsletters

@@ -3,6 +3,7 @@ import Home from "../components/MainPage/Home";
 import Saved from "../components/MainPage/Saved";
 import Liked from "../components/MainPage/Liked";
 import Live from "../components/MainPage/Live";
+import Upload from "../components/MainPage/Upload";
 
 const initialState = {
   page: <Home />,
@@ -20,6 +21,8 @@ export const MainPageContextReducer = (state, action) => {
       return { ...state, page: <Saved /> };
     case "LIVE":
       return { ...state, page: <Live /> };
+    case "UPLOAD":
+      return { ...state, page: <Upload /> };
   }
 };
 

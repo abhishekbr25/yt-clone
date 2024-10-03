@@ -28,9 +28,11 @@ app.use(express.json());
 import authRouter from "./routes/authRoute.js";
 import userRouter from "./routes/userRoute.js";
 import videoRouter from "./routes/videoRoutes.js";
+import postRouter from "./routes/postRoute.js";
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/video", videoRouter);
+app.use("/api/post", postRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${pc.green(`${port}`)}`);
