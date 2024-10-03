@@ -6,6 +6,7 @@ import pc from "picocolors";
 const app = express();
 const port = 3001;
 
+
 import { connectdb } from "./db/index.js";
 connectdb();
 // to get __dirname
