@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
-import { InputBox } from "../components/Inputbos";
+import { InputBox } from "../components/Inputbox";
 import { handleError, handleSuccess } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
 import { useAuthContext } from "../hook/useAuth";

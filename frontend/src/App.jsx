@@ -3,9 +3,8 @@ import "./App.css";
 import { Signup } from "./pages/Signup";
 import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
-import { Upload } from "./pages/Upload";
 import { useAuthContext } from "./hook/useAuth";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   // const state.user = localStorage.getItem("user");
@@ -23,11 +22,7 @@ function App() {
           element={state.user ? <Navigate to={"/"} /> : <Login />}
         />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/feed" element={<Upload />} exact>
-            <Route path="upload" element={<Upload />} />
-          </Route>
-        </Route>
+        <Route element={<ProtectedRoute />} />
 
         <Route path="/" element={<Feed />} />
       </Routes>

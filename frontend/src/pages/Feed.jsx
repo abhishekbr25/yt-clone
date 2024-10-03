@@ -5,7 +5,7 @@ import usePageContext from "../hook/useMainPage";
 
 export function Feed() {
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
-  const { state } = usePageContext();
+  const { state: PageState } = usePageContext();
   const hamburgerClickHandler = useCallback(() => {
     setIsOpen(!isOpen);
   }, [isOpen]);
@@ -26,7 +26,9 @@ export function Feed() {
           <SideBar />
         </aside>
       )}
-      <main>{state.page}</main>
+      <main className="bg-slate-800  flex flex-col items-center h-full w-full">
+        {PageState.page}
+      </main>
     </div>
   );
 }
